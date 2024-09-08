@@ -9,6 +9,7 @@ import {
   Query,
   Delete,
   Patch,
+  NotFoundException,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 
@@ -22,8 +23,12 @@ export class UsersController {
   }
 
   @Get('/:id')
-  findUser(@Param('id') id: string) {
-    return this.userService.findOne(id);
+  async findUser(@Param('id') id: string) {
+    const user = await this.userService.findOne(id);
+    if (!user) {
+      return new NotFoundException('user not found');
+    }
+    return user;
   }
 
   @Get('')
