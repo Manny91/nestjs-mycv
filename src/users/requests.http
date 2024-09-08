@@ -1,0 +1,28 @@
+POST http://localhost:3000/auth/signup
+Content-Type: application/json
+
+{
+    "email":"paco2@gmail.com",
+    "password": "1234"
+}
+
+### FIND A USER
+GET http://localhost:3000/auth/2
+
+
+### FIND A LIST OF USERS
+GET http://localhost:3000/auth
+
+
+
+### DELETE A USER
+DELETE http://localhost:3000/auth/1
+
+
+### UPDATE A USER
+PATCH http://localhost:3000/auth/2
+Content-Type: application/json
+
+{
+    "email":"aaa@aa.com"
+}
