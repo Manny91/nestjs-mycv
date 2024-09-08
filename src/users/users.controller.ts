@@ -12,8 +12,11 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
+import { Serialize } from '../interceptors/serialize.interceptor';
+import { UserDto } from './dtos/user.dto';
 
 @Controller('auth')
+@Serialize(UserDto)
 export class UsersController {
   constructor(private userService: UsersService) {}
 
@@ -31,6 +34,7 @@ export class UsersController {
     return user;
   }
 
+  // @Serialize(UserDto) in case you want it to be more specific you can add it to specific method
   @Get('')
   findAllUsers(@Query('email') email: string) {
     return this.userService.find(email);
