@@ -1,4 +1,22 @@
+### get the currently signed in user
+GET http://localhost:3000/auth/whoami
+
+### sign up
 POST http://localhost:3000/auth/signup
+Content-Type: application/json
+
+{
+    "email":"paco23@gmail.com",
+    "password": "1234"
+}
+
+
+### sign out
+POST http://localhost:3000/auth/signout
+
+
+### Sign In
+POST http://localhost:3000/auth/signin
 Content-Type: application/json
 
 {
