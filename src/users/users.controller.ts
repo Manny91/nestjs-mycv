@@ -36,11 +36,6 @@ export class UsersController {
     return user;
   }
 
-  //   @Get('/whoami')
-  //   whoAmI(@Session() session: any) {
-  //     return this.userService.findOne(session.userId);
-  //   }
-
   @Get('/whoami')
   @UseGuards(AuthGuard)
   whoAmI(@CurrentUser() user: User) {
@@ -62,13 +57,13 @@ export class UsersController {
   @Get('/:id')
   async findUser(@Param('id') id: string) {
     const user = await this.userService.findOne(id);
+    console.log('usesr', user);
     if (!user) {
-      return new NotFoundException('user not found');
+      throw new NotFoundException('user not found');
     }
     return user;
   }
 
-  // @Serialize(UserDto) in case you want it to be more specific you can add it to specific method
   @Get('')
   findAllUsers(@Query('email') email: string) {
     return this.userService.find(email);

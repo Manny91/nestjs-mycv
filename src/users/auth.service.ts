@@ -19,7 +19,8 @@ export class AuthService {
       throw new BadRequestException('email in use');
     }
 
-    // Hash the users pass
+    // ideally this could be extracted to a funct that builds logic of salting the password
+
     // generate salt
     const salt = randomBytes(8).toString('hex');
     // hash salt and password
