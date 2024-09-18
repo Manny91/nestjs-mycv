@@ -20,7 +20,9 @@ import { AuthService } from './auth.service';
 import { CurrentUser } from './decorators/current-user.decorator';
 import { User } from './entities/user.entity';
 import { AuthGuard } from '../guards/auth.guard';
-
+interface ISession {
+  userId: string;
+}
 @Controller('auth')
 @Serialize(UserDto)
 export class UsersController {
@@ -30,7 +32,7 @@ export class UsersController {
   ) {}
 
   @Post('/signup')
-  async createUser(@Body() body: CreateUserDto, @Session() session: any) {
+  async createUser(@Body() body: CreateUserDto, @Session() session: ISession) {
     const user = await this.authService.signup(body.email, body.password);
     session.userId = user.id;
     return user;
@@ -43,14 +45,14 @@ export class UsersController {
   }
 
   @Post('/signin')
-  async signin(@Body() body: CreateUserDto, @Session() session: any) {
+  async signin(@Body() body: CreateUserDto, @Session() session: ISession) {
     const user = await this.authService.signin(body.email, body.password);
     session.userId = user.id;
     return user;
   }
 
   @Post('/signout')
-  signout(@Session() session: any) {
+  signout(@Session() session: ISession) {
     session.userId = null;
   }
 

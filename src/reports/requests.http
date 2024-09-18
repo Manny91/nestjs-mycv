@@ -3,12 +3,24 @@ POST http://localhost:3000/reports/
 Content-Type: application/json
 
 {
-    "brand": "toyota",
-    "model": "corolla",
-    "year": 1980,
+    "brand": "ford",
+    "model": "mustang",
+    "year": 1981,
     "mileage": 10001,
     "lng": 0,
     "lat": 0,
-    "price": 50000
+    "price": 200000
 }
 
+
+### Approve an existing report
+PATCH  http://localhost:3000/reports/2
+Content-Type:  application/json
+
+{
+    "approved": true
+}
+
+
+### Get an estimate for existing vehicle
+GET  http://localhost:3000/reports?brand=ford&model=mustang&lng=0&lat=0&mileage=10001&year=1980
