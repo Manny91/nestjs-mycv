@@ -59,7 +59,6 @@ export class UsersController {
   @Get('/:id')
   async findUser(@Param('id') id: string) {
     const user = await this.userService.findOne(id);
-    console.log('usesr', user);
     if (!user) {
       throw new NotFoundException('user not found');
     }
